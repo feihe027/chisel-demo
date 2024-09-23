@@ -13,10 +13,16 @@ class UpCounter(counterWidth: Int) extends Module {
   io.count := count
 }
 
-
 object Main extends App {
-    ChiselStage.emitSystemVerilogFile(
+  emitVerilog(
     new UpCounter(4),
-    firtoolOpts = Array("-disable-all-randomization", "-strip-debug-info", "--split-verilog", "-o", "hdl/")
+    Array(
+      "--emission-options=disableMemRandomization,disableRegisterRandomization",
+      "--emit-modules=verilog", 
+      "--info-mode=use",
+      "--target-dir=hdl",
+      "--full-stacktrace",
+      // "--help"
+    )
   )
 }
