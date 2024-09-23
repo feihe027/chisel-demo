@@ -1,24 +1,18 @@
-// See README.md for license details.
 
-ThisBuild / scalaVersion     := "2.13.12"
-ThisBuild / version          := "0.1.0"
-ThisBuild / organization     := "com.github.feihe027"
+scalaVersion := "2.13.10"
 
-val chiselVersion = "6.2.0"
+scalacOptions ++= Seq(
+  "-deprecation",
+  "-feature",
+  "-unchecked",
+  "-Xfatal-warnings",
+  "-language:reflectiveCalls",
+)
 
-lazy val root = (project in file("."))
-  .settings(
-    name := "chisel-demo",
-    libraryDependencies ++= Seq(
-      "org.chipsalliance" %% "chisel" % chiselVersion,
-      "org.scalatest" %% "scalatest" % "3.2.16" % "test",
-    ),
-    scalacOptions ++= Seq(
-      "-language:reflectiveCalls",
-      "-deprecation",
-      "-feature",
-      "-Xcheckinit",
-      "-Ymacro-annotations",
-    ),
-    addCompilerPlugin("org.chipsalliance" % "chisel-plugin" % chiselVersion cross CrossVersion.full),
-  )
+
+val chiselVersion = "3.6.0"
+addCompilerPlugin("edu.berkeley.cs" %% "chisel3-plugin" % chiselVersion cross CrossVersion.full)
+libraryDependencies += "edu.berkeley.cs" %% "chisel3" % chiselVersion
+libraryDependencies += "edu.berkeley.cs" %% "chiseltest" % "0.6.2"
+libraryDependencies += "org.slf4j" % "slf4j-api" % "2.0.0"  // SLF4J API
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.4.6"  // Logback implementation
