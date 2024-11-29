@@ -4,7 +4,7 @@ VCS = vcs -full64 -sverilog -timescale=1ns/1ns 	+v2k -debug_access+all -kdb -lca
 
 # Generate Verilog code
 run:
-	sbt "runMain gcd.Main"
+	sbt "runMain counter.Main"
 	@sed -i 's/\/\/ @.*//g' hdl/*.v
 	@find hdl/ -type f -name "*.v" > hdl/filelist.f
 
@@ -24,10 +24,10 @@ clean:
 	@rm -f *.fir *_obj *.anno.json *.log
 
 test:
-	$(SBT) "testOnly gcd.GCDTest" --color=always 2>&1 | tee test.log
+	$(SBT) "testOnly counter.SimpleTestExpect" --color=always 2>&1 | tee test.log
 
 wave:
-	gtkwave --script=add_signal.tcl "test_run_dir/GCDTest_should_pass/Cmm.vcd"
+	gtkwave --script=add_signal.tcl "test_run_dir/DUT_should_pass/UpCounter.vcd"
 
 comp:
 	$(VCS) 
