@@ -33,7 +33,6 @@ ifeq ($(OS),Windows_NT)
 	@if exist *.anno.json del /q *.anno.json
 	@if exist *.log del /q *.log
 else
-	echo abc
 	@rm -rf verdiLog
 	@rm -rf project
 	@rm -rf obj_dir
