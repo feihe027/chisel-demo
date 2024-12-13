@@ -1,6 +1,7 @@
 package counter
 import chisel3._
 import _root_.circt.stage.ChiselStage
+import chisel3.util._  
 
 
 class UpCounter(counterWidth: Int) extends Module {
@@ -11,6 +12,7 @@ class UpCounter(counterWidth: Int) extends Module {
   val count = RegInit(0.U(counterWidth.W))
   count := count + 1.U
   io.count := count
+  printf(cf"count:${count}")
 }
 
 object Main extends App {
